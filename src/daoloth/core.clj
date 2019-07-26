@@ -1,8 +1,13 @@
 (ns daoloth.core
   (:gen-class)
+  (:import [javax.imageio ImageIO]
+           [java.awt.image BufferedImage])
+  (:require [clojure.java.io :as io])
   (:use seesaw.core
         seesaw.graphics
         seesaw.color))
+
+(def img (ImageIO/read (io/file "resources/maptiles/ice.png")))
 
 (defn paint [c g]
   (let [w (.getWidth c)
@@ -21,7 +26,11 @@
       (.setColor (color 224 0 0 128))
       (.fillRect (/ w 2) (/ h 2) (/ w 2) (/ h 2))
       (.setColor (color 0 0 0))
+
+      (.drawImage img, 0, 0, nil)
+
       (.drawString "Hello. This is a canvas example" 20 20))))
+
 
 
 (defn -main [& args]
@@ -29,7 +38,7 @@
     (->
       (frame
         :title "Canvas Example"
-        :width 500 :height 300
+        :width 1920 :height 1080
         :content
         (canvas :id :canvas :background "#BBBBDD" :paint paint))
       pack!
