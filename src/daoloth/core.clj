@@ -19,7 +19,7 @@
   (ImageIO/read (io/resource resource-path)))
 
 ; returns a map of the tiles associating char to tile
-(defn load-maptiles []
+(defn load-tile-map [resource-path]
   ; we insert each tile described inside of the json into the map
   (reduce
     (fn [map jsonentry]
@@ -33,7 +33,7 @@
       {} ; add them to empty map containing the char:tile binding
       ; get the list at the root of maptiles/maptiles.json
       (->
-        (io/resource "maptiles/maptiles.json")
+        (io/resource resource-path)
         (slurp)
         (json/decode))))
 
@@ -44,6 +44,8 @@
       (.setColor (color 224 224 0 128))
       ;(.drawImage img, 0, 0, nil)
       )))
+
+(def tile-map (load-tile-map "maptiles/maptiles.json"))
 
 (defn -main [& args]
   (invoke-later
