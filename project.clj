@@ -4,7 +4,9 @@
   :license {:name "Unlicense"
             :url "https://unlicense.org/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [seesaw "1.5.1-SNAPSHOT"]]
-  :main ^:skip-aot daoloth.core
+                 [seesaw "1.5.1-SNAPSHOT"]
+                 [cheshire "5.8.1"]]
+  :main daoloth.core
   :target-path "target/%s"
+  :plugins [[lein-cljfmt "0.6.4"]]
   :profiles {:uberjar {:aot :all}})
